@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/socket.h>
-#include "server.h"
+#include "http_server.h"
 
 HTTP_REQUEST client_http_request (int client_socket)
 {
@@ -41,8 +41,3 @@ HTTP_REQUEST client_http_request (int client_socket)
 
 	return client_data;
 }
-
-/*char* request_uri (int client_socket)
-{
-	recv();
-}*/

@@ -18,7 +18,7 @@ void string_merge (char* strings[], char* destinystring, int length)
 	if(merged_string == NULL)
 	{
 		perror("FAILED TO MERGE STRINGS");
-		exit(1);
+		exit(EXIT_FAILURE);
 	}
 
 	strcpy(merged_string, strings[0]);
@@ -28,7 +28,7 @@ void string_merge (char* strings[], char* destinystring, int length)
 		strcat(merged_string, strings[i]);
 	}
 
-	printf("%s\n", merged_string);
+	//printf("%s\n", merged_string);
 
 	snprintf(destinystring, full_length, "%s", merged_string);
 
@@ -37,12 +37,12 @@ void string_merge (char* strings[], char* destinystring, int length)
 
 size_t string_array_content_length (char* strings[], int length)
 {
-	size_t full_length = 0;
+	size_t full_length = 1;
 
 	for(int i = 0; i < length; i++)
 	{
 		full_length += strlen(strings[i]);
 	}
 
-	return full_length + 1;
+	return full_length;
 }

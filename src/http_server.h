@@ -8,13 +8,13 @@ typedef enum HTTP_CODES_ENUM {
 } HTTP_CODE;
 
 /* This is the message response struct */
-typedef struct HTTP_RAW_DATA {
+typedef struct HTTP_RESPONSE_STRUCT {
 	HTTP_CODE code;
 	char* content;
 	char* content_type;
 	char* request_protocol;
 	int socket;
-} HTTPrawdata;
+} HTTP_RESPONSE_DATA;
 
 /* A client request data */
 typedef struct CLIENT_REQUEST_STRUCT_DATA {
@@ -37,9 +37,12 @@ typedef void (*LISTEN_CALLBACK_FUNCTION)(HTTP_REQUEST);
 typedef void (*ROUTE_CALLBACK_FUNCTION)(void);
 
 void server_start(int,LISTEN_CALLBACK_FUNCTION);
+
 void set_client_socket(int);
 void http_html_response(HTTP_CODE,char*);
-void send_response(void);
+void http_json_response (HTTP_CODE,char*);
+void http_file_response(HTTP_CODE,char*);
+
 HTTP_REQUEST client_http_request(int);
 
 void add_route(char*,char*,ROUTE_CALLBACK_FUNCTION);

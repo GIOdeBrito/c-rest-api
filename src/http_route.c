@@ -1,10 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "server.h"
+#include "http_server.h"
 
 static HTTP_ROUTE ROUTES[MAX_ROUTES];
 static ROUTE_CALLBACK_FUNCTION ROUTE_CALLBACKS[MAX_ROUTES];
+
 static int ROUTE_COUNT = 0;
 
 void add_route (char* method, char* path, ROUTE_CALLBACK_FUNCTION callback)
@@ -15,6 +16,7 @@ void add_route (char* method, char* path, ROUTE_CALLBACK_FUNCTION callback)
 		return;
 	}
 
+	// Creates the route "object"
 	HTTP_ROUTE route = {
 		.method = method,
 		.path = path
@@ -30,6 +32,7 @@ void invoke_router (HTTP_REQUEST req)
 {
 	for(int i = 0; i < ROUTE_COUNT; i++)
 	{
+		// Checks if the raw memory data of both strings are equal
 		int res_compare = memcmp(req.path, ROUTES[i].path, strlen(req.path));
 
 		if(res_compare != 0)
@@ -41,7 +44,7 @@ void invoke_router (HTTP_REQUEST req)
 
 		if(ROUTE_CALLBACKS[i] == NULL)
 		{
-			printf("Callback for %s is NULL\n", req.path);
+			printf("Callback for %s is NULL or duplicate!\n", req.path);
 			break;
 		}
 

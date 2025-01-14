@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include "global.h"
-#include "server.h"
+#include "http_server.h"
 
 void create_routes (void);
 void callback (HTTP_REQUEST);
@@ -15,7 +15,7 @@ int main (void)
 	create_routes();
 	server_start(PORT, callback);
 
-	printf("Shutting down\n");
+	printf("Shutting down...\n");
 
 	return 0;
 }
@@ -23,8 +23,8 @@ int main (void)
 void create_routes (void)
 {
 	add_route("GET", "/", route_root);
-	add_route("GET", "/time", route_time);
-	add_route("GET", "/timev2", route_timev2);
+	add_route("GET", "/api/v1/time", route_time);
+	add_route("GET", "/api/v1/timeh", route_timev2);
 }
 
 void callback (HTTP_REQUEST req)
@@ -41,10 +41,10 @@ void route_root (void)
 
 void route_time (void)
 {
-	http_html_response(HTTP_OK, "It's time to du- du- du- du- dududududuel!");
+	http_json_response(HTTP_OK, "{\"time\":\"00:00\"}");
 }
 
 void route_timev2 (void)
 {
-	http_html_response(HTTP_OK, "<h1>Higi'a ha-zman le-du-karav</h1>");
+	http_html_response(HTTP_OK, "<h1>Higi'a ha-zman le-du-krav</h1>");
 }

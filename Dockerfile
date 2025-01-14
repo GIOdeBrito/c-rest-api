@@ -10,4 +10,4 @@ RUN mkdir objects
 
 RUN make
 
-CMD ["./main.g2"]
+CMD ["./main.g"]

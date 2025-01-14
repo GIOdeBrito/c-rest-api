@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include "global.h"
-#include "server.h"
+#include "http_server.h"
 
 #ifdef __linux__
     #include <arpa/inet.h>
@@ -12,7 +12,7 @@
 static int SERVER_SOCKET = 0;
 static LISTEN_CALLBACK_FUNCTION LISTEN_CALLBACK = NULL;
 
-void server_listen();
+static void server_listen();
 
 void server_start (int portnum, LISTEN_CALLBACK_FUNCTION callback)
 {
@@ -71,7 +71,7 @@ void server_start (int portnum, LISTEN_CALLBACK_FUNCTION callback)
 	close(SERVER_SOCKET);
 }
 
-void server_listen ()
+static void server_listen ()
 {
 	struct sockaddr_in client_address;
     socklen_t client_len = sizeof(&client_address);
