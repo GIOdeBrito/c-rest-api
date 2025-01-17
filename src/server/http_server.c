@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include "global.h"
 #include "http_server.h"
+#include "../main.h"
 
 #ifdef __linux__
     #include <arpa/inet.h>
@@ -55,9 +55,8 @@ void server_start (int portnum, LISTEN_CALLBACK_FUNCTION callback)
 	// Makes server listen for incoming connections
 	if(listen(SERVER_SOCKET, 10) == -1)
 	{
-		perror("SERVER ERROR WHEN ATTEMPTING TO LISTEN TO PORT:");
-		perror((char*) PORT);
-		exit(-4);
+		perror("SERVER ERROR WHEN ATTEMPTING TO LISTEN TO PORT");
+		exit(EXIT_FAILURE);
 	}
 
 	printf("Listening on PORT %d \n\n", portnum);

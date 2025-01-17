@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "global.h"
+#include "strings.h"
+#include "../main.h"
 
 void string_merge (char* strings[], char* destinystring, int length)
 {
@@ -45,4 +46,14 @@ size_t string_array_content_length (char* strings[], int length)
 	}
 
 	return full_length;
+}
+
+void int_tostring (int value, char* out)
+{
+    sprintf(out, "%d", value);
+}
+
+void float_tostring (float value, char* out)
+{
+    sprintf(out, "%1.3f", value);
 }

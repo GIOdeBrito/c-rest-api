@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <string.h>
-#include "global.h"
 #include "http_server.h"
+#include "../main.h"
+#include "../utility/strings.h"
 
 #ifdef __linux__
     #include <arpa/inet.h>

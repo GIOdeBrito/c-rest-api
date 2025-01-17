@@ -3,22 +3,22 @@
 # REST API makefile
 # =========================================================
 
-COMPILER = gcc
-CFLAGS = -Wall
-HEADER = global.h http_server.h
+COMPILER = 	gcc
+CFLAGS = 	-Wall
+HEADER = 	main.h server/http_server.h json/json.h utility/strings.h
 
-SOURCE = 	main.c utility.c http_server.c http_response.c \
-			http_utility.c http_route.c
+SOURCE = 	main.c utility/strings.c server/http_server.c server/http_response.c \
+			server/http_utility.c server/http_route.c json/http_json.c
 
 # Object files
-OBJ_DIR = objects
+BUILD_DIR = build
 _OBJ = $(patsubst %.c, %.o, $(SOURCE))
-OBJ = $(patsubst %, $(OBJ_DIR)/%, $(_OBJ))
+OBJ = $(patsubst %, $(BUILD_DIR)/%, $(_OBJ))
 
 # Name of the executable
 PROJECT = main.g
 
-$(OBJ_DIR)/%.o: %.c $(HEADER)
+$(BUILD_DIR)/%.o: %.c $(HEADER)
 	$(COMPILER) -c -o $@ $< $(CFLAGS)
 
 $(PROJECT): $(OBJ)
